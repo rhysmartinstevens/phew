@@ -419,6 +419,11 @@ class Phew:
         return route
     return None
 
+  # run other project code within this event loop
+  def run_a_task(self, coro):
+    logging.info("> starting coro task")
+    self.loop.create_task(coro)
+
   def run_as_task(self, loop, host = "0.0.0.0", port = 80, ssl=None):
     loop.create_task(uasyncio.start_server(self._handle_request, host, port, ssl=ssl))
 
